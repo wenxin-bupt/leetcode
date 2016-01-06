@@ -21,15 +21,15 @@ public:
 	
 	#ifdef SOLUTION_1
 	
-	//4 ms runtime solution
-	//Beautiful!!!
+//4 ms runtime solution
+//Beautiful!!!
     std::string longestPalindrome(std::string s) {
         if (s.size() < 2)
             return s;
         int len = s.size(), max_left = 0, max_len = 1, left, right;
         for (int start = 0; start < len && len - start > max_len / 2;) {
             left = right = start;
-			//下面循环可以统一子数组的长度为奇偶的两种情况，偶数子串一定存在重复字符
+//下面循环可以统一子数组的长度为奇偶的两种情况，偶数子串一定存在重复字符
             while (right < len - 1 && s[right + 1] == s[right])
                 ++right;
             start = right + 1;
@@ -47,11 +47,11 @@ public:
 
 	#else
 	
-	//My solution
-	//Need to search in both even way and odd way 
-	//Runtime 64ms
-	//Time Complexity: O(n^2);
-	//Yinsengyijingrucijiannan~ 
+//My solution
+//Need to search in both even way and odd way 
+//Runtime 64ms
+//Time Complexity: O(n^2);
+//Yinsengyijingrucijiannan~ 
 
     string longestPalindrome(string s) {
         int max = 1, front =  0, end = 0;
