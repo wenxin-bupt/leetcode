@@ -56,6 +56,7 @@ public:
 		if (extra) p->next = new ListNode(1);
 		return head.next;
 	}
+	#endif
 
 //my ugly code
 //time cost 40ms
