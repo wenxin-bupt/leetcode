@@ -1,6 +1,7 @@
 /**
 	Problem: Reverse Integer
 	Link:https://leetcode.com/problems/reverse-integer/
+	Reference:https://github.com/x-ceci/leetcode/blob/master/007_reverseInteger.cpp
 	Time complexity:O(1)
 	Space complexity:O(1)
 	Runtime:8ms
@@ -15,8 +16,25 @@
 	Assume the input is a 32-bit integer, then the reverse of 1000000003 overflows. How should you handle such cases?
 	For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
 **/
+
+//8ms Solution
+
+class Solution {
+public:
+	int reverse(int x) {
+		long long y = 0;
+		while (x) {
+			y = 10 * y + x % 10;
+			x /= 10;
+		}
+		return (y < INT_MIN || y > INT_MAX) ? 0 : y;
+	}
+};
+
 //8ms solution
 //运行时间看运气 :P
+//好蠢的方法.........
+/*
 class Solution {
 public:
     int reverse(int x) {
@@ -43,3 +61,5 @@ public:
 			return 0;
     }
 };
+
+*/
