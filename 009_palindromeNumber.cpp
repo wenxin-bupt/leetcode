@@ -1,6 +1,36 @@
+/**
+	Problem: Palindrome Number
+	Link:https://leetcode.com/problems/palindrome-number/
+	Reference:https://leetcode.com/discuss/33500/an-easy-lines-code-only-reversing-till-half-and-then-compare
+	Time complexity:O(1)
+	Space complexity:O(1)
+	Runtime:72ms
+**/
+/**
+	Requirements:
+	Determine whether an integer is a palindrome. Do this without extra space.
+	Negative integers are not palindromes.
+**/
 
-//runtime 88ms solution
+//72ms solution
+//Concise and beautiful!!
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x<0|| (x!=0 &&x%10==0)) return false;
+        int sum=0;
+        while(x>sum)
+        {
+            sum = sum*10+x%10;
+            x = x/10;
+        }
+        return (x==sum)||(x==sum/10);
+    }
+};
+
+//my runtime 88ms solution
 //ugly but somehow works!
+/*
 class Solution {
 public:
     bool isPalindrome(int x) {
@@ -57,3 +87,4 @@ public:
 
 	}
 };
+*/
