@@ -1,14 +1,73 @@
 /**
-	Problem: Word Search
+	Problem:Word Search
+	Link:https://leetcode.com/problems/word-search/
+	Reference:https://leetcode.com/discuss/27445/my-19ms-accepted-c-code
 **/
-//My 88ms colution
+
+/**
+	Given a 2D board and a word, find if the word exists in the grid.
+	The word can be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those horizontally or vertically neighboring. 
+	The same letter cell may not be used more than once.
+
+	For example,
+	Given board =
+	[
+	  ['A','B','C','E'],
+	  ['S','F','C','S'],
+	  ['A','D','E','E']
+	]
+	word = "ABCCED", -> returns true,
+	word = "SEE",    -> returns true,
+	word = "ABCB",   -> returns false.
+**/
+
+//19ms Solution
+//[Recursive] 未使用栈 很精巧 
+//Space complexity: O(4^n)
+class Solution {
+public:
+	 bool exist(vector<vector<char>> &board, string word) {
+		 m=board.size();
+		 n=board[0].size();
+		for(int x=0;x<m;x++)
+			for(int y=0;y<n;y++)
+			{
+				if(isFound(board,word.c_str(),x,y))
+					return true;
+			}
+		return false;
+	}
+private:
+	int m;
+	int n;
+	bool isFound(vector<vector<char>> &board, const char* w, int x, int y)
+	{
+		if(x<0||y<0||x>=m||y>=n||board[x][y]=='\0'||*w!=board[x][y])
+			return false;
+		if(*(w+1)=='\0')
+			return true;
+		char t=board[x][y];
+		board[x][y]='\0';
+		if(isFound(board,w+1,x-1,y)||isFound(board,w+1,x+1,y)||isFound(board,w+1,x,y-1)||isFound(board,w+1,x,y+1))
+			return true; 
+		board[x][y]=t;
+		return false;
+	}
+};
+
+//My 68ms colution
+//在使用一个新的matrix标记是否访问过和使用一个很长的固定数组作为栈的时候很难提升运行时间.
+//Nonrecursive
+//Space complexity: O(n^m)
+//Time complexity: O(n^2)
+/*
 class Pos{
 public:
 	Pos(int a, int b);
 	int i;
 	int j;
-}
-Pos::Pos(int a=0, int b=0):i(a),j(b){}
+};
+Pos::Pos(int a=0, int b=0):i(a),j(b){};
 
 class Solution {
 public:
@@ -17,9 +76,10 @@ public:
 		int col = board[0].size();
 		vector<bool> markRow(col, true);
 		vector<vector<bool>> matrix(row,markRow);
-		Pos headQ[100]; int headP = -1;
-		Pos resQ[100]; int resP = -1;
-		bool flag = true;
+		Pos headQ[200]; int headP = -1;
+		Pos resQ[1000]; int resP = -1;
+		
+	    bool flag = true;
 		for(int i=0; i<row; i++){
 			for(int j=0; j<col; j++){
 				if(board[i][j]==word[0]){
@@ -39,20 +99,19 @@ public:
 		if(visitP2==word.size())
 			return true;
 		while(headP!=-1){
-			cout<<board[visitP1.i][visitP1.j];
 			if(sign){
 				visitP1 = resQ[resP--];
 				matrix[visitP1.i][visitP1.j] = true;
 				visitP2--;
 				if(resP==-1){
-					headP--;
+				    headP--;
 					if(headP==-1)
 						break;
+					matrix[resQ[0].i][resQ[0].j] = true;
 					resQ[++resP] = headQ[headP];
-					reFresh(matrix, markRow);
 					first(resQ[resP], visitP1, matrix);
-					visitP2 = 1;
 					sign = false;
+					visitP2 = 1;
 					continue;
 				}
 				if(!next(resQ[resP], visitP1, matrix)){
@@ -61,8 +120,7 @@ public:
 					sign = false;
 				}
 			}else{
-				
-				if(board[visitP1.i][visitP1.j]==word[visitP2]){
+			    if(board[visitP1.i][visitP1.j]==word[visitP2]){
 					resQ[++resP] = visitP1;
 					if(!first(resQ[resP], visitP1, matrix))
 						sign = true;
@@ -165,10 +223,5 @@ private:
 		}
 	}
 	
-	void reFresh(vector<vector<bool>> &matrix, vector<bool> rowEle){
-		for(int i=0; i<matrix.size(); i++){
-			matrix[i].swap(rowEle);
-		}
-		return;
-	}
 };
+*/
