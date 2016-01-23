@@ -11,6 +11,8 @@
 	You may assume no duplicate exists in the array.
 **/
  
+//只使用了一次遍历
+//比较太多，运行时间相对很长。并不如先找到最小值点来的快。
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
