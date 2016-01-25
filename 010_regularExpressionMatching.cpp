@@ -50,7 +50,7 @@ public:
          * if p[j - 1] != '*'
          *      f[i][j] = f[i - 1][j - 1] && s[i - 1] == p[j - 1]
          * if p[j - 1] == '*', denote p[j - 2] with x
-         *      f[i][j] is true iff any of the following is true
+         *      f[i][j] is true if any of the following is true
          *      1) "x*" repeats 0 time and matches empty: f[i][j - 2]
          *      2) "x*" repeats >= 1 times and matches "x*x": s[i - 1] == x && f[i - 1][j]
          * '.' matches any single character
