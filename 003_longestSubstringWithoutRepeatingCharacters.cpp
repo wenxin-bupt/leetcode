@@ -13,8 +13,7 @@
 
 //submit version
 class Solution {
-public:
-    
+public:   
 	int lengthOfLongestSubstring(string s) {
 		int ifortest = 0;
 		if(s.size()==0) return 0;
@@ -40,8 +39,6 @@ public:
 		}
 		return m;
     }
-
-
 };
 
 
